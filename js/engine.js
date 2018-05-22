@@ -99,9 +99,9 @@ const Engine = function(global) {
      */
   function updateEntities(dt) {
     allEnemies.forEach(enemy => enemy.update(dt));
-
-    //player.update(dt);
-  }
+    if (player.time === 0)
+      reset('timeout');
+    }
 
   /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -181,6 +181,12 @@ const Engine = function(global) {
       });
     } else if (status === 'restart') {
       swal({title: 'Do you really want to restart?', text: 'Your progress will be lost!', type: 'warning', showCancelButton: true, confirmButtonText: 'Sure!'}).then(function(isConfirm) {
+        if (isConfirm) {
+          player = new Player(playerTime);
+        }
+      });
+    } else if (status === 'timeout') {
+      swal({title: 'Time is out.', text: 'The forest monster caught you! Do you want to try again?', type: 'warning', showCancelButton: true, confirmButtonText: 'Sure!'}).then(function(isConfirm) {
         if (isConfirm) {
           player = new Player(playerTime);
         }

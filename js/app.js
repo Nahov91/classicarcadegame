@@ -96,6 +96,15 @@ function generateEnemies(amount) {
 
   return enemiesCurrent;
 }
+//TIMER
+function timer() {
+  const timer = document.querySelector('.timer');
+  if (player.time > 0) {
+timer.innerText = player.time;
+} else if (player.time < 0) {
+timer.innerText = 0;
+}
+}
 
 //CREATING ENTITIES
 const allEnemies = generateEnemies(6);
@@ -109,6 +118,7 @@ const updateEnemies = setInterval(() => {
       allEnemies.add(enemy)
   }
   player.time -= 1;
+  timer();
 }, 1000)
 
 // This listens for key presses and sends the keys to your
