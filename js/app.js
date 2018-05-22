@@ -5,8 +5,8 @@ let playerTime = 60;
 const boxSizeY = 83;
 const boxSizeX = 101;
 
-const canvasWidth = 808;
-const canvasHeight = 560;
+const canvasWidth = 606;
+const canvasHeight = 415;
 
 //randomNumber GENERATOR
 function randomNumber(min, max) {
@@ -46,7 +46,7 @@ class Player {
   constructor(time) {
     this.time = time;
     this.sprite = `images/char-boy.png`;
-    this.startPoint = [404, 560];
+    this.startPoint = [207, 404];
     [this.x, this.y] = this.startPoint;
   }
 
@@ -60,9 +60,9 @@ move(x,y) {
   this.x += x;
   this.y += y;
   if (this.x >= canvasHeight
-  || this.x <= -80
+  || this.x <= -20
   || this.y >= canvasHeight
-  || this.y <= -200) {
+  || this.y <= -20) {
     this.x -= x;
     this.y -= y;
   }
