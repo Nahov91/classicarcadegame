@@ -1,46 +1,116 @@
-// Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+//GLOBAL VARIABLES
+let maxMonstersAmount = 30;
+let playerTime = 60;
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-};
+const boxSizeY = 83;
+const boxSizeX = 101;
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-};
+const canvasWidth = 808;
+const canvasHeight = 560;
 
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+//randomNumber GENERATOR
+function randomNumber(min, max) {
+  min = Math.ceil(min);
+  max = Math.ceil(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+// ENEMIES PLAYERS MUST AVOID(class)
+class Enemy {
+  constructor(startPosition, speed, type = 'bug') {
+    this.sprite = `images/enemy-bug.png`;
+    this.startPosition = [startPosition[0] - 30, startPosition[1]];
+    this.speed = speed;
+    this.x = this.startPosition[0];
+    this.y = this.startPosition[1];
+  }
+
+  // Update the enemy's position and time remaining, required method for game
+  // Parameter: dt, a time delta between ticks
+  update(dt) {
+    this.x += this.speed * dt;
+    if (this.x > 808) {
+      this.x = this.startPosition[0];
+      this.y = this.startPosition[1];
+    }
+  }
+
+  // Draw the enemy on the screen, required method for game
+  render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+  };
+}
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+//PLAYER(class)
+class Player {
+  constructor(time) {
+    this.time = time;
+    this.sprite = `images/char-boy.png`;
+    this.startPoint = [404, 560];
+    [this.x, this.y] = this.startPoint;
+  }
 
+  //Players render
+  render() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+  //Players control
+  handleInput(key) {
+    if (key === 'up') {
+      this.move(0, -boxsizeY);
+    } else if (key === 'down') {
+      this.move(0, boxSizeY);
+    } else if (key === 'left') {
+      this.move(boxSizeX, 0);
+    } else if (key === 'right') {
+      this.move(-boxSize, 0);
+    }
+  }
+}
 
+//GENERATING ENEMIES
+function generateEnemies(amount) {
+  const enemiesCurrent = new Set();
+  const enemyLanes = [1, 2, 3];
+  for (let i = 0; i < amount; i++) {
+    const startPointX = randomNumber(100, 300) * (-1);
+    const startPointY = boxSizeY * enemyLanes[randomNumber(0, 3)] - 25;
 
+    enemiesCurrent.add(new Enemy([startPointX, startPointY], randomNumber(100, 500)));
+  }
+
+  return enemiesCurrent;
+}
+
+//CREATING ENTITIES
+const allEnemies = generateEnemies(6);
+let player = new Player();
+
+//Creating enemies until amount reaches maxMonstersAmount
+const updateEnemies = setInterval(() => {
+  if (allEnemies.size < maxMonstersAmount) {
+    const enemiesUnit = generateEnemies(2);
+    for (const enemy of enemiesUnit)
+      allEnemies.add(enemy)
+  }
+  player.time -= 1;
+}, 1000)
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down'
-    };
+  var allowedKeys = {
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down'
+  };
 
-    player.handleInput(allowedKeys[e.keyCode]);
+  player.handleInput(allowedKeys[e.keyCode]);
 });
+
+document.querySelector('#start-game').addEventListener('click', function(e) {
+  e.preventDefault();
+  player = new Player(playerTime);
+})

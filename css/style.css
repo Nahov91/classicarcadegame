@@ -1,3 +1,40 @@
 body {
     text-align: center;
+    height: 100%;
+    background-color: black;
+    color: rgb(247,242,225);
+}
+
+h1, p, #start-game {
+  font-family: 'Press Start 2P', cursive;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+#start-game {
+  background-color: rgb(147, 0, 255);
+  border: none;
+  padding: 1%;
+  font-size: 1.6em;
+  color: rgb(247, 242, 225);
+  border-radius: 3px;
+}
+
+.timer {
+  font-size: 1.6em;
+}
+
+game-area {
+  max-width: 700px;
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  border: 5px solid rgb(247, 242, 225);
 }
