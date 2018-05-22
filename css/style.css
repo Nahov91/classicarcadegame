@@ -18,7 +18,7 @@ p {
   line-height: 1.5em;
 }
 
-#start-game {
+#restart-game {
   background-color: rgb(147, 0, 255);
   border: none;
   padding: 1%;
@@ -37,4 +37,25 @@ game-area {
   text-align: center;
   margin: 0 auto;
   border: 5px solid rgb(247, 242, 225);
+}
+
+.popup {
+  margin: 10% auto;
+  display: flex;
+  flex-wrap: wrap;
+  background: rgb(115, 115, 115);
+  width: 60%;
+  height: 50%;
+  color: black;
+  border-radius: 8px;
+  font-size: 1.3em;
+}
+
+.headLine {
+  font-size: 2em;
+  text-align: center;
+}
+
+.hide {
+  visibility: hidden;
 }

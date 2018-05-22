@@ -123,7 +123,8 @@ const Engine = function(global) {
       ],
       numRows = 6,
       numCols = 5;
-    let row, col;
+    let row,
+      col;
 
     // Before drawing, clear existing canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -162,7 +163,7 @@ const Engine = function(global) {
     });
 
     player.render();
-    if (player.y < -100) {
+    if (player.y < -10) {
       reset('win');
     }
   }
@@ -171,19 +172,32 @@ const Engine = function(global) {
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
-  function reset() {
-    // noop
+  function reset(status) {
+    if (status === 'win') {
+      swal({title: 'You won!', text: 'You escaped from the forest monster!', type: 'success', confirmButtonText: 'Play Again'}).then(function(isConfirm) {
+        if (isConfirm) {
+          player = new Player(playerTime);
+        }
+      });
+    } else if (status === 'restart') {
+      swal({title: 'Do you really want to restart?', text: 'Your progress will be lost!', type: 'warning', showCancelButton: true, confirmButtonText: 'Sure!'}).then(function(isConfirm) {
+        if (isConfirm) {
+          player = new Player(playerTime);
+        }
+      });
+    }
   }
+
+  document.querySelector('#restart-game').addEventListener('click', function(e) {
+    e.preventDefault();
+    reset('restart');
+  });
 
   /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
      */
-  Resources.load(['images/stone-block.png',
-  'images/water-block.png',
-  'images/grass-block.png',
-  'images/enemy-bug.png',
-  'images/char-boy.png']);
+  Resources.load(['images/stone-block.png', 'images/water-block.png', 'images/grass-block.png', 'images/enemy-bug.png', 'images/char-boy.png']);
   Resources.onReady(init);
 
   /* Assign the canvas' context object to the global variable (the window

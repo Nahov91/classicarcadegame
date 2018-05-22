@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>Cross the Road!</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel='stylesheet prefetch' href='https://cdn.jsdelivr.net/sweetalert2/3.0.3/sweetalert2.min.css'>
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -23,12 +24,19 @@
       </div>
     </section>
     <section>
-      <button id="start-game" type="button" name="button">Start the Game!</button>
+      <button id="restart-game" type="button" name="button">Restart</button>
+    </section>
+    <section>
+      <div class="popup">
+        <h2 class=headLine></h2>
+        <p class=popupText></p>
+      </div>
     </section>
   </main>
   <script src="js/resources.js"></script>
   <script src="js/app.js"></script>
   <script src="js/engine.js"></script>
+  <script src='https://cdn.jsdelivr.net/sweetalert2/3.0.3/sweetalert2.min.js'></script>
 </body>
 
 </html>

@@ -123,8 +123,3 @@ document.addEventListener('keyup', function (e) {
 
   player.handleInput(allowedKeys[e.keyCode]);
 });
-
-document.querySelector('#start-game').addEventListener('click', function(e) {
-  e.preventDefault();
-  player = new Player(playerTime);
-})
