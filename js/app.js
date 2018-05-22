@@ -1,5 +1,5 @@
 //GLOBAL VARIABLES
-let maxMonstersAmount = 30;
+let maxMonstersAmount = 3;
 let playerTime = 60;
 
 const boxSizeY = 83;
@@ -55,16 +55,30 @@ class Player {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
+//Player can't move offscreen
+move(x,y) {
+  this.x += x;
+  this.y += y;
+  if (this.x >= canvasHeight
+  || this.x <= -80
+  || this.y >= canvasHeight
+  || this.y <= -200) {
+    this.x -= x;
+    this.y -= y;
+  }
+}
+
+
   //Players control
   handleInput(key) {
     if (key === 'up') {
-      this.move(0, -boxsizeY);
+      this.move(0, -boxSizeY);
     } else if (key === 'down') {
       this.move(0, boxSizeY);
     } else if (key === 'left') {
-      this.move(boxSizeX, 0);
+      this.move(-boxSizeX, 0);
     } else if (key === 'right') {
-      this.move(-boxSize, 0);
+      this.move(boxSizeX, 0);
     }
   }
 }
@@ -99,7 +113,7 @@ const updateEnemies = setInterval(() => {
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+document.addEventListener('keyup', function (e) {
   var allowedKeys = {
     37: 'left',
     38: 'up',
