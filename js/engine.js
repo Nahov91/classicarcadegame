@@ -26,7 +26,7 @@ const Engine = function(global) {
   let lastTime;
 
   canvas.width = 505;
-  canvas.height = 606;
+  canvas.height = 590;
   gameArea.appendChild(canvas);
 
   /* This function serves as the kickoff point for the game loop itself
@@ -166,6 +166,7 @@ const Engine = function(global) {
     player.render();
     if (player.y < -10) {
       reset('win');
+      player = new Player(playerTime);
     }
   }
 
@@ -204,7 +205,7 @@ const Engine = function(global) {
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
      */
-  Resources.load(['images/stone-block.png', 'images/water-block.png', 'images/grass-block.png', 'images/enemy-bug.png', 'images/char-boy.png']);
+  Resources.load(['images/stone-block.png','images/background.png', 'images/water-block.png', 'images/grass-block.png', 'images/enemy-bug.png', 'images/char-boy.png']);
   Resources.onReady(init);
 
   /* Assign the canvas' context object to the global variable (the window

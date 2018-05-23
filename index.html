@@ -11,21 +11,29 @@
 </head>
 
 <body>
+  <div class="app-title">
+    <p>Classic Arcade Game</p>
+  </div>
   <main>
     <header>
       <h1>Cross the Road!</h1>
     </header>
-    <section>
-      <p>You came across this scary road full of giant bugs, <br> but the forest monster is chasing you! <br>You have to run! Cross the road without touching the bugs!</p>
+    <section class="game-description">
+      <p>You came across this scary road full of giant bugs, but the forest monster is chasing you! <br>You have to run! Cross the road without touching the bugs!</p>
     </section>
+    <div class="game-container">
     <section class="game-area">
+      <div class="time-left">
+        <p>Time left:</p>
+      </div>
       <div class="timer">
-        <p>60</p>
+        60
       </div>
     </section>
     <section>
       <button id="restart-game" type="button" name="button">Restart</button>
     </section>
+    </div>
   </main>
   <script src="js/resources.js"></script>
   <script src="js/app.js"></script>
