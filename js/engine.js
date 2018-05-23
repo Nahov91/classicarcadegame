@@ -187,7 +187,7 @@ const Engine = function(global) {
         }
       });
     } else if (status === 'timeout') {
-      swal({title: 'Time is out.', text: 'The forest monster caught you! Do you want to try again?', type: 'warning', showCancelButton: true, confirmButtonText: 'Sure!'}).then(function(isConfirm) {
+      swal({title: 'Time is out.', text: 'The forest monster caught you! Do you want to try again?', type: 'warning', showCancelButton: true, imageUrl: 'images/forest-monster.png', confirmButtonText: 'Sure!'}).then(function(isConfirm) {
         if (isConfirm) {
           player = new Player(playerTime);
         }
