@@ -67,6 +67,7 @@ const Engine = function(global) {
     reset();
     lastTime = Date.now();
     main();
+    player = new Player(playerTime);
   }
 
   /* This function is called by main (our game loop) and itself calls all
